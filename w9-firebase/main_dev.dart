@@ -1,5 +1,7 @@
+import 'package:app/w9-firebase/data/repositories/artists/artist_repository.dart';
+import 'package:app/w9-firebase/data/repositories/artists/artist_repository_firebase.dart';
 import 'package:provider/provider.dart';
- 
+
 import 'data/repositories/songs/song_repository_firebase.dart';
 import 'main_common.dart';
 import 'data/repositories/settings/app_settings_repository_mock.dart';
@@ -12,7 +14,6 @@ List<InheritedProvider> get devProviders {
   final appSettingsRepository = AppSettingsRepositoryMock();
 
   return [
- 
     // 1 - Inject the song repository
     Provider<SongRepository>(create: (_) => SongRepositoryFirebase()),
 
@@ -23,6 +24,8 @@ List<InheritedProvider> get devProviders {
     ChangeNotifierProvider<AppSettingsState>(
       create: (_) => AppSettingsState(repository: appSettingsRepository),
     ),
+
+    Provider<ArtistRepository>(create: (_) => ArtistRepositoryFirebase()),
   ];
 }
 
