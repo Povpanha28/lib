@@ -1,4 +1,4 @@
-import 'package:app/w9-firebase/ui/screens/artist/artist_screen.dart';
+import 'package:w9/w9-firebase/ui/screens/artist/artist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'ui/screens/library/library_screen.dart';

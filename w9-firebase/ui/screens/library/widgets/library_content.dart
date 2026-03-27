@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:w9/w9-firebase/model/artists/artist.dart';
 import '../../../../model/songs/song.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/async_value.dart';
@@ -14,28 +15,40 @@ class LibraryContent extends StatelessWidget {
     // 1- Read the globbal song repository
     LibraryViewModel mv = context.watch<LibraryViewModel>();
 
-    AsyncValue<List<Song>> asyncValue = mv.songsValue;
+    AsyncValue<List<Map<String, dynamic>>> asyncValue = mv.songsValue;
 
     Widget content;
     switch (asyncValue.state) {
-      
       case AsyncValueState.loading:
         content = Center(child: CircularProgressIndicator());
         break;
       case AsyncValueState.error:
-        content = Center(child: Text('error = ${asyncValue.error!}', style: TextStyle(color: Colors.red),));
+        content = Center(
+          child: Text(
+            'error = ${asyncValue.error!}',
+            style: TextStyle(color: Colors.red),
+          ),
+        );
 
       case AsyncValueState.success:
-        List<Song> songs = asyncValue.data!;
+        final data = asyncValue.data!;
+
         content = ListView.builder(
-          itemCount: songs.length,
-          itemBuilder: (context, index) => SongTile(
-            song: songs[index],
-            isPlaying: mv.isSongPlaying(songs[index]),
-            onTap: () {
-              mv.start(songs[index]);
-            },
-          ),
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final item = data[index];
+            final song = item['song'] as Song;
+            final artist = item['artist'] as Artist;
+
+            return SongTile(
+              song: song,
+              artist: artist,
+              isPlaying: mv.isSongPlaying(song),
+              onTap: () {
+                mv.start(song);
+              },
+            );
+          },
         );
     }
 

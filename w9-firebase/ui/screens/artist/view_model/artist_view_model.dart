@@ -1,6 +1,6 @@
-import 'package:app/w9-firebase/data/repositories/artists/artist_repository.dart';
-import 'package:app/w9-firebase/model/artists/artist.dart';
-import 'package:app/w9-firebase/ui/utils/async_value.dart';
+import 'package:w9/w9-firebase/data/repositories/artists/artist_repository.dart';
+import 'package:w9/w9-firebase/model/artists/artist.dart';
+import 'package:w9/w9-firebase/ui/utils/async_value.dart';
 import 'package:flutter/material.dart';
 
 class ArtistViewModel extends ChangeNotifier {

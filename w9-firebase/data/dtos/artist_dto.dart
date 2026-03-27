@@ -1,4 +1,4 @@
-import 'package:app/w9-firebase/model/artists/artist.dart';
+import 'package:w9/w9-firebase/model/artists/artist.dart';
 
 class ArtistDto {
   static const nameKey = "name";

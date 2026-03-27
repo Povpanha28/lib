@@ -1,5 +1,5 @@
-import 'package:app/w9-firebase/data/repositories/artists/artist_repository.dart';
-import 'package:app/w9-firebase/data/repositories/artists/artist_repository_firebase.dart';
+import 'package:w9/w9-firebase/data/repositories/artists/artist_repository.dart';
+import 'package:w9/w9-firebase/data/repositories/artists/artist_repository_firebase.dart';
 import 'package:provider/provider.dart';
 
 import 'data/repositories/songs/song_repository_firebase.dart';

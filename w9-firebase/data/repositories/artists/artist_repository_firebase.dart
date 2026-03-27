@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:app/w9-firebase/data/dtos/artist_dto.dart';
-import 'package:app/w9-firebase/data/repositories/artists/artist_repository.dart';
-import 'package:app/w9-firebase/model/artists/artist.dart';
+import 'package:w9/w9-firebase/data/dtos/artist_dto.dart';
+import 'package:w9/w9-firebase/data/repositories/artists/artist_repository.dart';
+import 'package:w9/w9-firebase/model/artists/artist.dart';
 import 'package:http/http.dart' as http;
 
 class ArtistRepositoryFirebase implements ArtistRepository {
@@ -27,7 +27,6 @@ class ArtistRepositoryFirebase implements ArtistRepository {
       }
 
       return result;
-      
     } else {
       // 2- Throw expcetion if any issue
       throw Exception('Failed to load posts');

@@ -1,7 +1,7 @@
-import 'package:app/w9-firebase/model/artists/artist.dart';
-import 'package:app/w9-firebase/ui/screens/artist/view_model/artist_view_model.dart';
-import 'package:app/w9-firebase/ui/theme/theme.dart';
-import 'package:app/w9-firebase/ui/utils/async_value.dart';
+import 'package:w9/w9-firebase/model/artists/artist.dart';
+import 'package:w9/w9-firebase/ui/screens/artist/view_model/artist_view_model.dart';
+import 'package:w9/w9-firebase/ui/theme/theme.dart';
+import 'package:w9/w9-firebase/ui/utils/async_value.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
