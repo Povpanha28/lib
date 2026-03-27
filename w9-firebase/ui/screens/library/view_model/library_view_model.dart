@@ -34,17 +34,36 @@ class LibraryViewModel extends ChangeNotifier {
     fetchSong();
   }
 
+  // List<Map<String, dynamic>> joinSongsWithArtists(
+  //   List<Song> songs,
+  //   List<Artist> artists,
+  // ) {
+  //   final artistMap = {for (var artist in artists) artist.id: artist};
+
+  //   return songs.map((song) {
+  //     final artist = artistMap[song.artistId];
+
+  //     return {'song': song, 'artist': artist};
+  //   }).toList();
+  // }
+
+  // easier to understand
   List<Map<String, dynamic>> joinSongsWithArtists(
     List<Song> songs,
     List<Artist> artists,
   ) {
-    final artistMap = {for (var artist in artists) artist.id: artist}; // 
+    List<Map<String, dynamic>> result = [];
 
-    return songs.map((song) {
-      final artist = artistMap[song.artistId];
+    for (var song in songs) {
+      // find matching artist using firstWhere
+      Artist? foundArtist = artists.firstWhere(
+        (artist) => artist.id == song.artistId,
+      );
 
-      return {'song': song, 'artist': artist};
-    }).toList();
+      result.add({'song': song, 'artist': foundArtist});
+    }
+
+    return result;
   }
 
   void fetchSong() async {
