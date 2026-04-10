@@ -47,6 +47,10 @@ class SongRepositoryFirebase extends SongRepository {
       }
     }
 
+    return _fetchSongByIdFromNetwork(id);
+  }
+
+  Future<Song?> _fetchSongByIdFromNetwork(String id) async {
     final Uri songUri = Uri.https(_host, '/songs/$id.json');
     final http.Response response = await http.get(songUri);
 
@@ -78,7 +82,7 @@ class SongRepositoryFirebase extends SongRepository {
       throw Exception('Failed to like song with id $songId');
     }
 
-    final Song? updatedSong = await fetchSongById(songId);
+    final Song? updatedSong = await _fetchSongByIdFromNetwork(songId);
     if (updatedSong == null) {
       throw Exception('Song with id $songId not found after like');
     }
