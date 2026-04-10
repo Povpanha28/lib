@@ -52,6 +52,7 @@ class LibraryViewModel extends ChangeNotifier {
     List<Song> songs,
     List<Artist> artists,
   ) {
+    
     List<Map<String, dynamic>> result = [];
 
     for (var song in songs) {

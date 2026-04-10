@@ -37,8 +37,8 @@ class LibraryContent extends StatelessWidget {
           itemCount: data.length,
           itemBuilder: (context, index) {
             final item = data[index];
-            final song = item['song'] as Song;
-            final artist = item['artist'] as Artist;
+            final Song song = item['song'];
+            final Artist artist = item['artist'];
 
             return SongTile(
               song: song,

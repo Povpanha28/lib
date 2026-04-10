@@ -9,13 +9,11 @@ class PlayerState extends ChangeNotifier {
 
   void start(Song song) {
     _currentSong = song;
-
     notifyListeners();
   }
 
   void stop() {
     _currentSong = null;
-
     notifyListeners();
   }
 }

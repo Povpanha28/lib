@@ -57,12 +57,21 @@ class ArtistTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(artist.imageUrl.toString()),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(artist.imageUrl.toString()),
+          ),
+          title: Text(artist.name),
+          subtitle: Text(artist.genre),
+        ),
       ),
-      title: Text(artist.name),
-      subtitle: Text(artist.genre),
     );
   }
 }

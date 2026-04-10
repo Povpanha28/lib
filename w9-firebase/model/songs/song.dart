@@ -11,6 +11,7 @@ class Song {
     required this.artistId,
     required this.duration,
     required this.imageUrl,
+    
   });
 
   @override
