@@ -1,0 +1,71 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+import '../../../model/songs/song.dart';
+import '../../dtos/song_dto.dart';
+import 'song_repository.dart';
+
+class SongRepositoryFirebase extends SongRepository {
+  static const String _host =
+      'w9-firebase-7eba2-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+  final Uri songsUri = Uri.https(_host, '/songs.json');
+
+  @override
+  Future<List<Song>> fetchSongs() async {
+    final http.Response response = await http.get(songsUri);
+
+    if (response.statusCode == 200) {
+      // 1 - Send the retrieved list of songs
+      Map<String, dynamic> songJson = json.decode(response.body);
+
+      List<Song> result = [];
+      for (final entry in songJson.entries) {
+        result.add(SongDto.fromJson(entry.key, entry.value));
+      }
+      return result;
+    } else {
+      // 2- Throw expcetion if any issue
+      throw Exception('Failed to load posts');
+    }
+  }
+
+  @override
+  Future<Song?> fetchSongById(String id) async {
+    final Uri songUri = Uri.https(_host, '/songs/$id.json');
+    final http.Response response = await http.get(songUri);
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load song with id $id');
+    }
+
+    final dynamic responseBody = json.decode(response.body);
+    if (responseBody == null) {
+      return null;
+    }
+
+    return SongDto.fromJson(id, responseBody as Map<String, dynamic>);
+  }
+
+  @override
+  Future<Song> likeSong({required String songId,required int currentLikes,}) async {
+    final Uri songUri = Uri.https(_host, '/songs/$songId.json');
+
+    final http.Response response = await http.patch(
+      songUri,
+      body: json.encode({'likes': currentLikes + 1}),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to like song with id $songId');
+    }
+
+    final Song? updatedSong = await fetchSongById(songId);
+    if (updatedSong == null) {
+      throw Exception('Song with id $songId not found after like');
+    }
+
+    return updatedSong;
+  }
+}
